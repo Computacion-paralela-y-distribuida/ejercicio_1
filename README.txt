@@ -1,4 +1,6 @@
 mvn compile
 mnv test
 
-Al correr los tests salen errores en los tests porque esos son las actividades a hacer. 
+Al correr los tests salen errores porque esos son las actividades a hacer. 
+
+La idea es que cada uno cree una rama con su nombre
