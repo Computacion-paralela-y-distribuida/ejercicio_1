@@ -1,5 +1,6 @@
 package co.edu.unal.paralela;
 
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
 /**
@@ -113,6 +114,7 @@ public final class ReciprocalArraySum {
             this.startIndexInclusive = setStartIndexInclusive;
             this.endIndexExclusive = setEndIndexExclusive;
             this.input = setInput;
+
         }
 
         /**
@@ -126,8 +128,22 @@ public final class ReciprocalArraySum {
         @Override
         protected void compute() {
             // Para hacer
+            if( endIndexExclusive - startIndexInclusive < (input.length)/2){
+                for (int i = startIndexInclusive; i < endIndexExclusive; ++i) {
+                    value += (1 / input[i]);
+                }
+            }else{
+                ReciprocalArraySumTask left = new ReciprocalArraySumTask(startIndexInclusive, (startIndexInclusive+endIndexExclusive)/2, input);
+                ReciprocalArraySumTask right = new ReciprocalArraySumTask((startIndexInclusive+endIndexExclusive)/2,endIndexExclusive , input);
+                left.fork();
+                right.compute();
+                left.join();
+                value = left.getValue() + right.getValue();
+            }
+
         }
     }
+
 
     /**
      * Para hacer: Modificar este método para calcular la misma suma de recíprocos como le realizada en
@@ -140,16 +156,25 @@ public final class ReciprocalArraySum {
      */
     protected static double parArraySum(final double[] input){
         assert input.length % 2 == 0;
-
+        //System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "2");
         double sum = 0;
 
-        // Calcula la suma de los recíprocos de los elementos del arreglo
-        for (int i = 0; i < input.length; i++) {
-            sum += 1 / input[i];
-        }
+        ReciprocalArraySumTask t = new ReciprocalArraySumTask(
+                                                               0,
+                                                                input.length,
+                                                                input
+                                                                );
 
-        return sum;
+        ForkJoinPool.commonPool().invoke(t);
+        return t.getValue();
     }
+
+
+
+
+
+
+
 
     /**
      * Para hacer: extender el trabajo hecho para implementar parArraySum que permita utilizar un número establecido
