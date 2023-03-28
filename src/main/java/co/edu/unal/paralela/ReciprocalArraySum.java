@@ -135,7 +135,7 @@ public final class ReciprocalArraySum {
 
         @Override
         protected void compute() {
-            if( endIndexExclusive - startIndexInclusive <= input.length/(2*numOfTasks)){
+            if( endIndexExclusive - startIndexInclusive <= 2000){
                 for (int i = startIndexInclusive; i < endIndexExclusive; ++i) {
                     value += (1 / input[i]);
                 }
