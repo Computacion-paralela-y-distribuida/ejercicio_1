@@ -1,5 +1,11 @@
 package co.edu.unal.paralela;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
@@ -7,6 +13,8 @@ import java.util.concurrent.RecursiveAction;
  * Clase que contiene los métodos para implementar la suma de los recíprocos de un arreglo usando paralelismo.
  */
 public final class ReciprocalArraySum {
+
+    public static int numOfTasks;
 
     /**
      * Constructor.
@@ -22,7 +30,6 @@ public final class ReciprocalArraySum {
      */
     protected static double seqArraySum(final double[] input) {
         double sum = 0;
-
         // Calcula la suma de los recíprocos de los elementos del arreglo
         for (int i = 0; i < input.length; i++) {
             sum += 1 / input[i];
@@ -102,6 +109,7 @@ public final class ReciprocalArraySum {
          */
         private double value;
 
+
         /**
          * Constructor.
          * @param setStartIndexInclusive establece el índice inicial para comenzar
@@ -127,8 +135,7 @@ public final class ReciprocalArraySum {
 
         @Override
         protected void compute() {
-            // Para hacer
-            if( endIndexExclusive - startIndexInclusive < (input.length)/2){
+            if( endIndexExclusive - startIndexInclusive <= input.length/(2*numOfTasks)){
                 for (int i = startIndexInclusive; i < endIndexExclusive; ++i) {
                     value += (1 / input[i]);
                 }
@@ -156,8 +163,7 @@ public final class ReciprocalArraySum {
      */
     protected static double parArraySum(final double[] input){
         assert input.length % 2 == 0;
-        //System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "2");
-        double sum = 0;
+        numOfTasks = 2;
 
         ReciprocalArraySumTask t = new ReciprocalArraySumTask(
                                                                0,
@@ -172,10 +178,6 @@ public final class ReciprocalArraySum {
 
 
 
-
-
-
-
     /**
      * Para hacer: extender el trabajo hecho para implementar parArraySum que permita utilizar un número establecido
      * de tareas para calcular la suma del arreglo recíproco. 
@@ -186,15 +188,22 @@ public final class ReciprocalArraySum {
      * @param numTasks El número de tareas para crear
      * @return La suma de los recíprocos del arreglo de entrada
      */
-    protected static double parManyTaskArraySum(final double[] input,
-            final int numTasks) {
+    protected static double parManyTaskArraySum(final double[] input, final int numTasks) {
+        numOfTasks = numTasks;
         double sum = 0;
+        ForkJoinPool pool = new ForkJoinPool(numOfTasks);
+        ReciprocalArraySumTask[] tasks = new ReciprocalArraySumTask[numOfTasks];
+        for (int i = 0; i < numOfTasks; i++) {
+            int start = getChunkStartInclusive(i, numOfTasks, input.length);
+            int end = getChunkEndExclusive(i, numOfTasks, input.length);
+            tasks[i] = new ReciprocalArraySumTask(start, end, input);
+            pool.invoke(tasks[i]);
+            tasks[i].getValue();
+            sum += tasks[i].getValue();
 
-        // Calcula la suma de los recíprocos de los elementos del arreglo
-        for (int i = 0; i < input.length; i++) {
-            sum += 1 / input[i];
         }
-
         return sum;
     }
+
+
 }
