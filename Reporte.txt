@@ -1,0 +1,27 @@
+Test 3: testParManyTaskTwoMillion
+
+Prueba 1: Código que puso Jhon
+Resultados: 0.285714 - 0.074074 - 0.400000
+Promedio: 0.2532626667
+
+Prueba 2: Uso exclusivo de ForkJoinPool.commonPool().invoke(tasks[i]);
+Resultados: 0.333333 - 0.200000 - 0.333333
+Promedio: 0.2888886667
+
+Prueba 3: Nuevo algoritmo usando .fork y .join
+Resultados: Fallo total
+
+testaParManyTaskTwoMillion
+	getNCores
+	parTestHelper
+		createArray
+		seqArraySum
+		parManyTaskArraySum
+			recursive_iteration
+				ReciprocalArraySumTask
+					getValue
+					compute
+				getChunkStartInclusive
+					getChunkSize
+				getChunkEndExclusive
+		parArraySum
