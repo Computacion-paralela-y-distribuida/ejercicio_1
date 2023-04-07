@@ -7,7 +7,8 @@ import junit.framework.TestCase;
 public class ReciprocalArraySumTest extends TestCase {
     // Número de veces que se debe repetir cada prueba para dar consistencia de los resultados de en el tiempo.
     final static private int REPEATS = 60;
-
+    
+    //Función que devuelve el número de núcleos que posee la máquina
     private static int getNCores() {
             return Runtime.getRuntime().availableProcessors();
     }
@@ -126,10 +127,13 @@ public class ReciprocalArraySumTest extends TestCase {
     }
 
     /**
-     * Prueba que la implementación de muchas tareas en paralelo calcula correctamente los resultados para arreglos con un millónde elementos.
+     * Prueba que la implementación de muchas tareas en paralelo calcula correctamente los 
+     * resultados para arreglos con un millón de elementos.
      */
     public void testParManyTaskTwoMillion() {
+        //Número de núcleos de la máquina
         final int ncores = getNCores();
+        //Aceleración mínima esperada
         final double minimalExpectedSpeedup = (double)ncores * 0.6;
         final double speedup = parTestHelper(2_000_000, true, ncores);
         final String errMsg = String.format("Se esperaba que la implmentación de muchas tareas en paralelo pudiera ejecutarse " +
@@ -142,7 +146,7 @@ public class ReciprocalArraySumTest extends TestCase {
      */
     public void testParManyTaskTwoHundredMillion() {
         final int ncores = getNCores();
-        final double speedup = parTestHelper(200_000_000, true, ncores);
+        final double speedup = parTestHelper(200_000_00, true, ncores);
         final double minimalExpectedSpeedup = (double)ncores * 0.8;
         final String errMsg = String.format("Se esperaba que la implmentación de muchas tareas en paralelo pudiera ejecutarse " +
                 " %fx veces más rápido, pero solo alcanzo a mejorar la rapidez (speedup) %fx veces", minimalExpectedSpeedup, speedup);

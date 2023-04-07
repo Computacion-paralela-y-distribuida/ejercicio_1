@@ -1,5 +1,5 @@
 mvn compile
-mnv test
+mvn test
 
 Al correr los tests salen errores porque esos son las actividades a hacer. 
 

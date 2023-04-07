@@ -1,32 +1,18 @@
 -------------------------------------------------------------------------------
 Test set: co.edu.unal.paralela.ReciprocalArraySumTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 3.448 sec <<< FAILURE! - in co.edu.unal.paralela.ReciprocalArraySumTest
-testParSimpleTwoMillion(co.edu.unal.paralela.ReciprocalArraySumTest)  Time elapsed: 0.034 sec  <<< FAILURE!
-junit.framework.AssertionFailedError: No concuerda el resultado para N = 2000000, valor esperado = 104672.524998, valor calculado = 0.000000, error absoluto = 104672.524998
+Tests run: 4, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 22.905 sec <<< FAILURE! - in co.edu.unal.paralela.ReciprocalArraySumTest
+testParManyTaskTwoHundredMillion(co.edu.unal.paralela.ReciprocalArraySumTest)  Time elapsed: 0.168 sec  <<< FAILURE!
+junit.framework.AssertionFailedError: No concuerda el resultado para N = 20000000, valor esperado = 1045499,869774, valor calculado = 1045578,761075, error absoluto = 78,891301
 	at junit.framework.Assert.fail(Assert.java:47)
 	at junit.framework.Assert.assertTrue(Assert.java:20)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.parTestHelper(ReciprocalArraySumTest.java:78)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.testParSimpleTwoMillion(ReciprocalArraySumTest.java:111)
+	at co.edu.unal.paralela.ReciprocalArraySumTest.parTestHelper(ReciprocalArraySumTest.java:79)
+	at co.edu.unal.paralela.ReciprocalArraySumTest.testParManyTaskTwoHundredMillion(ReciprocalArraySumTest.java:149)
 
 testParManyTaskTwoMillion(co.edu.unal.paralela.ReciprocalArraySumTest)  Time elapsed: 0.02 sec  <<< FAILURE!
-junit.framework.AssertionFailedError: No concuerda el resultado para N = 2000000, valor esperado = 104672.524998, valor calculado = 0.000000, error absoluto = 104672.524998
+junit.framework.AssertionFailedError: No concuerda el resultado para N = 2000000, valor esperado = 104672,524998, valor calculado = 104549,968535, error absoluto = 122,556463
 	at junit.framework.Assert.fail(Assert.java:47)
 	at junit.framework.Assert.assertTrue(Assert.java:20)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.parTestHelper(ReciprocalArraySumTest.java:78)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.testParManyTaskTwoMillion(ReciprocalArraySumTest.java:134)
-
-testParManyTaskTwoHundredMillion(co.edu.unal.paralela.ReciprocalArraySumTest)  Time elapsed: 1.658 sec  <<< FAILURE!
-junit.framework.AssertionFailedError: No concuerda el resultado para N = 200000000, valor esperado = 10459940.214862, valor calculado = 0.000000, error absoluto = 10459940.214862
-	at junit.framework.Assert.fail(Assert.java:47)
-	at junit.framework.Assert.assertTrue(Assert.java:20)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.parTestHelper(ReciprocalArraySumTest.java:78)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.testParManyTaskTwoHundredMillion(ReciprocalArraySumTest.java:145)
-
-testParSimpleTwoHundredMillion(co.edu.unal.paralela.ReciprocalArraySumTest)  Time elapsed: 1.736 sec  <<< FAILURE!
-junit.framework.AssertionFailedError: No concuerda el resultado para N = 200000000, valor esperado = 10459940.214862, valor calculado = 0.000000, error absoluto = 10459940.214862
-	at junit.framework.Assert.fail(Assert.java:47)
-	at junit.framework.Assert.assertTrue(Assert.java:20)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.parTestHelper(ReciprocalArraySumTest.java:78)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.testParSimpleTwoHundredMillion(ReciprocalArraySumTest.java:121)
+	at co.edu.unal.paralela.ReciprocalArraySumTest.parTestHelper(ReciprocalArraySumTest.java:79)
+	at co.edu.unal.paralela.ReciprocalArraySumTest.testParManyTaskTwoMillion(ReciprocalArraySumTest.java:138)
 

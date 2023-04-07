@@ -138,7 +138,25 @@ public final class ReciprocalArraySum {
         return t.getValue();
     }
 
-
+    protected static double recursive_iteration(int numtasks, int chunk, int length,
+            ReciprocalArraySumTask[] tasks, double[] input){
+        
+        if(numtasks - 2 == chunk){
+            tasks[chunk] = new ReciprocalArraySumTask(getChunkStartInclusive(chunk, numtasks, length), getChunkEndExclusive(chunk, numtasks, length), input);
+            tasks[chunk].fork();
+            tasks[chunk+1] = new ReciprocalArraySumTask(getChunkStartInclusive(chunk, numtasks, length), getChunkEndExclusive(chunk, numtasks, length), input);
+            tasks[chunk+1].compute();
+            tasks[chunk].join();
+            return tasks[chunk].getValue() + tasks[chunk+1].getValue();
+        }else{
+            tasks[chunk] = new ReciprocalArraySumTask(getChunkStartInclusive(chunk, numtasks, length), getChunkEndExclusive(chunk, numtasks, length), input);
+            tasks[chunk].fork();
+            double sum = recursive_iteration(numtasks, chunk+1, length, tasks, input);
+            tasks[chunk].join();
+            
+            return tasks[chunk].getValue() + sum;
+        }
+    }
 
 
     /**
@@ -152,20 +170,13 @@ public final class ReciprocalArraySum {
      * @return La suma de los recíprocos del arreglo de entrada
      */
     protected static double parManyTaskArraySum(final double[] input, final int numTasks) {
-        numOfTasks = numTasks;
-        double sum = 0;
-        ForkJoinPool pool = new ForkJoinPool(numOfTasks);
-        ReciprocalArraySumTask[] tasks = new ReciprocalArraySumTask[numOfTasks];
-        for (int i = 0; i < numOfTasks; i++) {
-            int start = getChunkStartInclusive(i, numOfTasks, input.length);
-            int end = getChunkEndExclusive(i, numOfTasks, input.length);
-            tasks[i] = new ReciprocalArraySumTask(start, end, input);
-            pool.invoke(tasks[i]);
-            tasks[i].getValue();
-            sum += tasks[i].getValue();
-
-        }
-        return sum;
+        //numOfTasks = numTasks;
+        //double sum = 0;
+        int length = input.length;
+        //ForkJoinPool pool = new ForkJoinPool(numOfTasks);
+        ReciprocalArraySumTask[] tasks = new ReciprocalArraySumTask[numTasks];
+   
+        return recursive_iteration(numTasks, 0, length, tasks, input);
     }
 
 
