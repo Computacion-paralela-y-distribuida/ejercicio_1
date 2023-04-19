@@ -188,22 +188,17 @@ public final class ReciprocalArraySum {
      * @param numTasks El número de tareas para crear
      * @return La suma de los recíprocos del arreglo de entrada
      */
-    protected static double parManyTaskArraySum(final double[] input, final int numTasks) {
-        numOfTasks = numTasks;
-        double sum = 0;
-        ForkJoinPool pool = new ForkJoinPool(numOfTasks);
-        ReciprocalArraySumTask[] tasks = new ReciprocalArraySumTask[numOfTasks];
-        for (int i = 0; i < numOfTasks; i++) {
-            int start = getChunkStartInclusive(i, numOfTasks, input.length);
-            int end = getChunkEndExclusive(i, numOfTasks, input.length);
-            tasks[i] = new ReciprocalArraySumTask(start, end, input);
-            pool.invoke(tasks[i]);
-            tasks[i].getValue();
-            sum += tasks[i].getValue();
+ 
+     protected static double parManyTaskArraySum(final double[] input,
+            final int numTasks) {
 
-        }
+        ReciprocalArraySumTask t = new ReciprocalArraySumTask(0,input.length,input,numTasks);
+
+        ForkJoinPool pool = new ForkJoinPool(numTasks);
+        pool.invoke(t);
+
+        double sum = t.getValue();
+
         return sum;
-    }
-
 
 }
