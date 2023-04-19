@@ -200,5 +200,5 @@ public final class ReciprocalArraySum {
         double sum = t.getValue();
 
         return sum;
-
+     }
 }
