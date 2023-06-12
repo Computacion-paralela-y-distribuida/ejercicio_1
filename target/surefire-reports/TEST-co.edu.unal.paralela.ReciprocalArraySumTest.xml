@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="co.edu.unal.paralela.ReciprocalArraySumTest" time="3.448" tests="4" errors="0" skipped="0" failures="4">
+<testsuite name="co.edu.unal.paralela.ReciprocalArraySumTest" time="39.968" tests="4" errors="0" skipped="0" failures="1">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\bin"/>
@@ -28,7 +28,7 @@
     <property name="os.name" value="Windows 10"/>
     <property name="classworlds.conf" value="C:\Users\user\Documents\UNAL\Paralela\Entrega 1\apache-maven-3.9.0\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_202\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\user\Documents\UNAL\Paralela\Entrega 1\apache-maven-3.9.0/bin;C:\Program Files\Docker\Docker\resources\bin;C:\Windows\System32;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\nodejs\node_modules\npm\bin;C:\Program Files\nodejs\;C:\Users\user\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\user\AppData\Local\Programs\Python\Python311\;C:\Users\user\Documents\UNAL\hugo;C:\Users\user\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Users\user\AppData\Roaming\npm;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_202\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\user\Documents\UNAL\Paralela\Entrega 1\apache-maven-3.9.0/bin;C:\Program Files\Docker\Docker\resources\bin;C:\Windows\System32;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\nodejs\node_modules\npm\bin;C:\Program Files\nodejs\;C:\Users\user\AppData\Local\Programs\Python\Python311\Scripts\;C:\Program Files\PuTTY\;C:\Users\user\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\user\AppData\Local\Programs\Python\Python311\;C:\Users\user\Documents\UNAL\hugo;C:\Users\user\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Docker\Docker\resources\bin;C:\Users\user\AppData\Roaming\npm;C:\Users\user\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;."/>
     <property name="maven.conf" value="C:\Users\user\Documents\UNAL\Paralela\Entrega 1\apache-maven-3.9.0/conf"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
@@ -64,36 +64,14 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testParSimpleTwoMillion" classname="co.edu.unal.paralela.ReciprocalArraySumTest" time="0.034">
-    <failure message="No concuerda el resultado para N = 2000000, valor esperado = 104672.524998, valor calculado = 0.000000, error absoluto = 104672.524998" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: No concuerda el resultado para N = 2000000, valor esperado = 104672.524998, valor calculado = 0.000000, error absoluto = 104672.524998
+  <testcase name="testParManyTaskTwoMillion" classname="co.edu.unal.paralela.ReciprocalArraySumTest" time="0.25"/>
+  <testcase name="testParSimpleTwoMillion" classname="co.edu.unal.paralela.ReciprocalArraySumTest" time="0.196"/>
+  <testcase name="testParSimpleTwoHundredMillion" classname="co.edu.unal.paralela.ReciprocalArraySumTest" time="19.696"/>
+  <testcase name="testParManyTaskTwoHundredMillion" classname="co.edu.unal.paralela.ReciprocalArraySumTest" time="19.826">
+    <failure message="Se esperaba que la implmentación de muchas tareas en paralelo pudiera ejecutarse  9.600000x veces más rápido, pero solo alcanzo a mejorar la rapidez (speedup) 4.555556x veces" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Se esperaba que la implmentación de muchas tareas en paralelo pudiera ejecutarse  9.600000x veces más rápido, pero solo alcanzo a mejorar la rapidez (speedup) 4.555556x veces
 	at junit.framework.Assert.fail(Assert.java:47)
 	at junit.framework.Assert.assertTrue(Assert.java:20)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.parTestHelper(ReciprocalArraySumTest.java:78)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.testParSimpleTwoMillion(ReciprocalArraySumTest.java:111)
-</failure>
-  </testcase>
-  <testcase name="testParManyTaskTwoMillion" classname="co.edu.unal.paralela.ReciprocalArraySumTest" time="0.02">
-    <failure message="No concuerda el resultado para N = 2000000, valor esperado = 104672.524998, valor calculado = 0.000000, error absoluto = 104672.524998" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: No concuerda el resultado para N = 2000000, valor esperado = 104672.524998, valor calculado = 0.000000, error absoluto = 104672.524998
-	at junit.framework.Assert.fail(Assert.java:47)
-	at junit.framework.Assert.assertTrue(Assert.java:20)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.parTestHelper(ReciprocalArraySumTest.java:78)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.testParManyTaskTwoMillion(ReciprocalArraySumTest.java:134)
-</failure>
-  </testcase>
-  <testcase name="testParManyTaskTwoHundredMillion" classname="co.edu.unal.paralela.ReciprocalArraySumTest" time="1.658">
-    <failure message="No concuerda el resultado para N = 200000000, valor esperado = 10459940.214862, valor calculado = 0.000000, error absoluto = 10459940.214862" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: No concuerda el resultado para N = 200000000, valor esperado = 10459940.214862, valor calculado = 0.000000, error absoluto = 10459940.214862
-	at junit.framework.Assert.fail(Assert.java:47)
-	at junit.framework.Assert.assertTrue(Assert.java:20)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.parTestHelper(ReciprocalArraySumTest.java:78)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.testParManyTaskTwoHundredMillion(ReciprocalArraySumTest.java:145)
-</failure>
-  </testcase>
-  <testcase name="testParSimpleTwoHundredMillion" classname="co.edu.unal.paralela.ReciprocalArraySumTest" time="1.736">
-    <failure message="No concuerda el resultado para N = 200000000, valor esperado = 10459940.214862, valor calculado = 0.000000, error absoluto = 10459940.214862" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: No concuerda el resultado para N = 200000000, valor esperado = 10459940.214862, valor calculado = 0.000000, error absoluto = 10459940.214862
-	at junit.framework.Assert.fail(Assert.java:47)
-	at junit.framework.Assert.assertTrue(Assert.java:20)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.parTestHelper(ReciprocalArraySumTest.java:78)
-	at co.edu.unal.paralela.ReciprocalArraySumTest.testParSimpleTwoHundredMillion(ReciprocalArraySumTest.java:121)
+	at co.edu.unal.paralela.ReciprocalArraySumTest.testParManyTaskTwoHundredMillion(ReciprocalArraySumTest.java:149)
 </failure>
   </testcase>
 </testsuite>

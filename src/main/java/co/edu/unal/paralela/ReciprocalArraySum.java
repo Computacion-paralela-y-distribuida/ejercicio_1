@@ -1,11 +1,6 @@
 package co.edu.unal.paralela;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.Callable;
+
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
@@ -135,7 +130,7 @@ public final class ReciprocalArraySum {
 
         @Override
         protected void compute() {
-            if( endIndexExclusive - startIndexInclusive <= 2000){
+            if( endIndexExclusive - startIndexInclusive <= 69800){ //69800
                 for (int i = startIndexInclusive; i < endIndexExclusive; ++i) {
                     value += (1 / input[i]);
                 }
@@ -163,13 +158,8 @@ public final class ReciprocalArraySum {
      */
     protected static double parArraySum(final double[] input){
         assert input.length % 2 == 0;
-        numOfTasks = 2;
 
-        ReciprocalArraySumTask t = new ReciprocalArraySumTask(
-                                                               0,
-                                                                input.length,
-                                                                input
-                                                                );
+        ReciprocalArraySumTask t = new ReciprocalArraySumTask(0, input.length, input);
 
         ForkJoinPool.commonPool().invoke(t);
         return t.getValue();
@@ -191,15 +181,13 @@ public final class ReciprocalArraySum {
     protected static double parManyTaskArraySum(final double[] input, final int numTasks) {
         numOfTasks = numTasks;
         double sum = 0;
-        ForkJoinPool pool = new ForkJoinPool(numOfTasks);
-        ReciprocalArraySumTask[] tasks = new ReciprocalArraySumTask[numOfTasks];
+        ReciprocalArraySumTask t;
         for (int i = 0; i < numOfTasks; i++) {
             int start = getChunkStartInclusive(i, numOfTasks, input.length);
             int end = getChunkEndExclusive(i, numOfTasks, input.length);
-            tasks[i] = new ReciprocalArraySumTask(start, end, input);
-            pool.invoke(tasks[i]);
-            tasks[i].getValue();
-            sum += tasks[i].getValue();
+            t = new ReciprocalArraySumTask(start, end, input);
+            ForkJoinPool.commonPool().invoke(t);
+            sum += t.getValue();
 
         }
         return sum;
